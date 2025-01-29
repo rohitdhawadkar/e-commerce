@@ -6,14 +6,14 @@ const router: Router = Router();
 router.post<{}, {}, { username: string; password: string }>(
   "/register",
   (req, res, next) => {
-    Register(req, res).catch(next); // Handle errors
+    Register(req, res).catch(next);
   },
 );
 
 router.post<{}, {}, { username: string; password: string }>(
   "/login",
   (req, res, next) => {
-    Login(req, res).catch(next); // Handle errors
+    Login(req, res).catch(next);
   },
 );
 
