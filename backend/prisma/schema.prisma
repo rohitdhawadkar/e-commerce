@@ -14,10 +14,33 @@ model User {
 }
 
 model Product {
-  p_id          Int    @unique
+  p_id          Int        @unique
   p_name        String
   p_description String
   p_category    String
   p_price       Float
-  id            Int    @id @default(autoincrement())
+  id            Int        @id @default(autoincrement())
+  cartItems     CartItem[]
+}
+
+model Cart {
+  id        String     @id @default(cuid())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  items     CartItem[]
+}
+
+model CartItem {
+  id     String @id @default(cuid())
+  cartId String
+  cart   Cart   @relation(fields: [cartId], references: [id])
+
+  p_id    Int
+  product Product @relation(fields: [p_id], references: [p_id])
+
+  quantity Int
+  price    Decimal
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
